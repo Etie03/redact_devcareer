@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Redact Text</title>
+  <script>
+    function redactText() {
+      var originalText = document.getElementById('originalText').value;
+      var wordsToRedact = document.getElementById('wordsToRedact').value.split(' ');
+
+      for (var i = 0; i < wordsToRedact.length; i++) {
+        var regex = new RegExp('\\b' + wordsToRedact[i] + '\\b', 'gi');
+        originalText = originalText.replace(regex, '*'.repeat(wordsToRedact[i].length));
+      }
+
+      document.getElementById('redactedText').innerHTML = originalText;
+    }
+  </script>
+</head>
+<body>
+  <h1>Redact Text</h1>
+  <div>
+    <label for="originalText">Original Text:</label><br>
+    <textarea id="originalText" rows="5" cols="50"></textarea>
+  </div>
+  <div>
+    <label for="wordsToRedact">Words to Redact:</label><br>
+    <input type="text" id="wordsToRedact">
+  </div>
+  <br>
+  <button onclick="redactText()">Redact Now</button>
+  <br>
+  <h2>Redacted Text:</h2>
+  <div id="redactedText"></div>
+</body>
+</html>
